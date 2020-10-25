@@ -89,6 +89,7 @@ double get_value(string s)
 	for(const auto& v : var_table)
 		if (v.name == s) return v.value;
 	error("get: undefined variable", s);
+	return -1;
 }
 
 void set_value(string s, double d)
@@ -98,7 +99,7 @@ void set_value(string s, double d)
 			v.value = d;
 			return;
 		}
-		error("set: undefined variable", s);
+	error("set: undefined variable", s);
 }
 // Variable end ///////////////////////
 
@@ -184,6 +185,7 @@ Token Token_stream::get()
     		}
     		error("Bad token");
     	}
+    	return 0;
 	}
 }
 
@@ -266,6 +268,7 @@ double primary()
 		default:
 			error("primary expected");
 	}
+	return -1;
 }
 
 double term()
