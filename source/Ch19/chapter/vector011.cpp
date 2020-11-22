@@ -8,34 +8,26 @@ class My_vector {
 	T* elem;
 	int space;
 
-	void debug(const string& s)
-	{
-		cerr << this << "->" << s << "; elem pointer: " << elem << endl;
-	}
 public:
 	My_vector(): sz{0}, elem{nullptr}, space{0} {}
 	
 	explicit My_vector(int s): sz(s), elem{new T[s]}
 	{
-		//debug("(int s) constructor");
 		for (int i = 0; i < s; ++i) elem[i] = 0;
 	}
 	
 	My_vector(initializer_list<T> lst): sz{lst.size()}, elem{new T[sz]}
 	{
-		//debug("(initializer_list<double> lst) constructor");
 		copy(lst.begin(), lst.end(), elem);
 	}
 
 	My_vector(const My_vector& arg): sz{arg.sz}, elem{new T[arg.sz]}
 	{
-		//debug("copy constructor");
 		copy(arg.elem, arg.elem+arg.sz, elem);
 	}
 
 	My_vector& operator=(const My_vector& arg)
 	{
-		//debug("copy assignment");
 		if (this == &arg) return *this;
 
 		if (arg.sz <= space)
@@ -55,14 +47,12 @@ public:
 
 	My_vector(My_vector&& arg): sz{arg.sz}, elem{arg.elem}
 	{
-		//debug("move constructor");
 		arg.sz = 0;
 		arg.elem = nullptr;
 	}
 
 	My_vector& operator=(My_vector&& arg)
 	{
-		//debug("move assignment");
 		delete[] elem;
 		elem = arg.elem;
 		sz = arg.sz;
@@ -73,12 +63,8 @@ public:
 	
 	~My_vector() 
 	{
-		//debug("destructor"); 
 		delete[] elem; 
 	}
-
-	//double get(int n) const { return elem[n]; }
-	//void set(int n, double val) { elem[n] = val; }
 
 	T& operator[](int n) { return elem[n]; }
 	T operator[](int n) const { return elem[n]; }
@@ -125,15 +111,6 @@ public:
 		return elem[n];
 	}
 };
-/*
-My_vector fill()
-{
-	My_vector res = {21.2, 23.4, 2.2};
-	
-	return res;
-}
-*/
-//My_vector glob(10);
 
 int main()
 try {
