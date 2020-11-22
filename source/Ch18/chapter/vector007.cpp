@@ -11,48 +11,48 @@ class My_vector {
 public:
 	explicit My_vector(int s): sz(s), elem{new double[s]}
 	{
-		//debug("(int s) constructor");
 		for (int i = 0; i < s; ++i) elem[i] = 0;
+		//debug("(int s) constructor");
 	}
 	
 	My_vector(initializer_list<double> lst): sz{lst.size()}, elem{new double[sz]}
 	{
-		//debug("(initializer_list<double> lst) constructor");
 		copy(lst.begin(), lst.end(), elem);
+		//debug("(initializer_list<double> lst) constructor");
 	}
 
 	My_vector(const My_vector& arg): sz{arg.sz}, elem{new double[arg.sz]}
 	{
-		//debug("copy constructor");
 		copy(arg.elem, arg.elem+arg.sz, elem);
+		//debug("copy constructor");
 	}
 
 	My_vector& operator=(const My_vector& arg)
 	{
-		//debug("copy assignment");
 		double *p = new double[arg.sz];
 		copy(arg.elem, arg.elem+arg.sz, p);
 		delete[] elem;
 		elem = p;
 		sz = arg.sz;
+		//debug("copy assignment");
 		return *this;
 	}
 
 	My_vector(My_vector&& arg): sz{arg.sz}, elem{arg.elem}
 	{
-		//debug("move constructor");
 		arg.sz = 0;
 		arg.elem = nullptr;
+		//debug("move constructor");
 	}
 
 	My_vector& operator=(My_vector&& arg)
 	{
-		//debug("move assignment");
 		delete[] elem;
 		elem = arg.elem;
 		sz = arg.sz;
 		arg.elem = nullptr;
 		arg.sz = 0;
+		//debug("move assignment");
 		return *this;
 	}
 	
